@@ -1,14 +1,12 @@
 import React from "react";
-const RestroCard = (props)=>{
-    const {resName,cuisine,imgSrc}=props;
+const RestroCard = ({resName,cuisine,imgSrc,resRating})=>{
 
     return (
         <div className="res-card">
-            <img className="card-img" src={props.imgSrc} alt="food_img" />
-            <h3>{props.resName}</h3>
-            <h4>{props.cuisine}</h4>
-            <h5>4 star rating</h5>
-            <h6>36 Minutes</h6>
+            <img className="card-img" src={imgSrc} alt="food_img" />
+            <h3>{resName}</h3>
+            <h4>{cuisine}</h4>
+            <h5>{resRating}</h5>
         </div>
     )
 };

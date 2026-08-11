@@ -1,23 +1,166 @@
 import React from "react";
-import RestroCard from "./RestroCard"
+import RestroCard from "./RestroCard";
+import { useState,useEffect } from "react";
+
+const resList = [
+  {
+    resName: "Kaadale Restaurant - Pure Veg",
+    cuisine: "Gongura Biriyani",
+    imgSrc: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSC2WO1gG_b8QJfovgJWtix0NVFeQ_whCZL2JjEtqDCIw&s=10",
+    resRating: "5"
+  },
+  {
+    resName: "Taj Mahal Hotel",
+    cuisine: "Besibeli Bath",
+    imgSrc: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpamieTp5V8JIPIysk1o9CSTPH0eQqcn48-30foLI8ew&s=10",
+    resRating: "4",
+  },
+  {
+    resName: "Hotel Alpaharam",
+    cuisine: "Upma",
+    imgSrc: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScHcHIRIJCZfy_Bbpb6LL_scM0kXtw_3YcMtZqb_6zEg&s=10",
+    resRating: "3",
+  },
+  {
+    resName: "Vijaya Raghavendra Tiffin center",
+    cuisine: "Poori",
+    imgSrc: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhfeUvzyJspU4afBu1iZJWKUVJJ_nskkBiPgrL5J6YYw&s=10",
+    resRating: "3",
+  },
+  {
+    resName: "Raghavendra Tiffin center",
+    cuisine: "Masala Dosa",
+    imgSrc: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_Mq87vFqqJJe6ntF5jt8G4dAtNGw7bT5GWfY042oP6w&s=10",
+    resRating: "3",
+  },
+  {
+    resName: "Hotel Udipi veg - Pure Veg",
+    cuisine: "Bonda",
+    imgSrc: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSIsI0_jvtyoHrJ6FYTUozI34znEH9f-M46xRTn0y_ZA&s=10",
+    resRating: "2",
+  },
+  {
+    resName: "Rama Krishna Hotel",
+    cuisine: "Vada",
+    imgSrc: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsOwaT0P7eeKHJo8OUZx_U76jK9HyjoCWRwkdf4MEwBA&s=10",
+    resRating: "5",
+  },
+  {
+    resName: "Usha Kumari Hotel",
+    cuisine: "Boorlu",
+    imgSrc: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7D859zGiOmo-3TXVgO4nvfo_iha0LGubaPNEGZ2Fc5Q&s=10",
+    resRating: "5",
+  },
+  {
+    resName: "Teja Vaishnavi Hotel",
+    cuisine: "Biriyani",
+    imgSrc: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGzRJbLLNXMdTVNHFA6QZ0QZ3zrnHitCbwr2IMJGan8A&s=10",
+    resRating: "5",
+  },
+  {
+    resName: "Hanumanth Hotel",
+    cuisine: "Biriyani",
+    imgSrc: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTNhNfZvIrIHFpY2l_a3LSaHSQut-PKXSRagvvRJyi7CQ&s",
+    resRating: "5",
+  },
+  {
+    resName: "Green Treat",
+    cuisine: "Panner Biriyani",
+    imgSrc: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjjR9_w-dKowNnaVzx8T93JnKM2K3yq9ZT6GY3c4cT8bVDGKTEfVl6tuXL&s=10",
+    resRating: "3",
+  },
+  {
+    resName: "Ram ki Bandi",
+    cuisine: "Dosas",
+    imgSrc: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCHNAksaZUfBNqcBBJchNqBKwA-G2WZ6Phom8u6AqD3Q&s=10",
+    resRating: "5",
+  },
+  {
+    resName: "PullaReddy Sweets",
+    cuisine: "MilkPak",
+    imgSrc: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTI8isdYnvoIlvPvGwyDrHjndBVMRKZtpkQJ-H4phR68Q&s=10",
+    resRating: "2",
+  },
+  {
+    resName: "Swagruha Sweete",
+    cuisine: "Mysoore Pk",
+    imgSrc: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwKQTaeUerxPbuWayIljvhV3REhZ0CCA84i_JkxSgz5g&s=10",
+    resRating: "2",
+  },
+  {
+    resName: "Delhi Mithai Wala",
+    cuisine: "Ravva Laddu",
+    imgSrc: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4hCRXJKoOoqFirnlc_ABdfpaXbCIgG37_7DlzBE0v-A&s=10",
+    resRating: "1",
+  },
+  {
+    resName: "Kaadale restraunt",
+    cuisine: "Biriyani",
+    imgSrc: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4hCRXJKoOoqFirnlc_ABdfpaXbCIgG37_7DlzBE0v-A&s=10",
+    resRating: "5",
+  },
+  {
+    resName: "balaji Santosh Dhabha",
+    cuisine: "Biriyani",
+    imgSrc: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4pmfgWVmlsmG71kc3t6eImNOMqjiL49QoQHeKLtYfVg&s=10",
+    resRating: "5",
+  },
+  {
+    resName: "Govindas Pure veg Hotel",
+    cuisine: "Biriyani",
+    imgSrc: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3Gq0d5K03bqCKTjGYCyxNHx9WZY5ykpxpdLOuLnKb4w&s=10",
+    resRating: "5",
+  },
+  {
+    resName: "Hotel Udipi veg",
+    cuisine: "Biriyani",
+    imgSrc: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRssxmrgQuLBG-MazWPixCt45-gXV3JmKvbyZDBOrmDA&s=10",
+    resRating: "5",
+  },
+  {
+    resName: "Veggie Chinese",
+    cuisine: "",
+    imgSrc: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRssxmrgQuLBG-MazWPixCt45-gXV3JmKvbyZDBOrmDA&s=10",
+    resRating: "2",
+  },
+  {
+    resName: "Sri SaiRam Parlour",
+    cuisine: "Biriyani",
+    imgSrc: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDZo-ByUjVVnu7GGA4Co5ZmWGHR2_udznlt_DQHI20bA&s=10",
+    resRating: "4",
+  },
+  {
+    resName: "Hotel Daspalla",
+    cuisine: "Biriyani",
+    imgSrc: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_WIxVrPj6Q99hwXjcOKhU4vIMalAXVA7QgZHukPsDXw&s",
+    resRating: "5",
+  },
+  {
+    resName: "Hotel Novotel",
+    cuisine: "Biriyani",
+    imgSrc: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSFFR8UPMRytAjnqqvzPePjtO24tRxUj5r--2wB35Svg&s=10",
+    resRating: "5",
+  }
+];
 
 const Body = ()=>{
+
     return (
         <div className="body">
-            <div className="search"></div>
+
+            <div className="filter">
+                <button className="filter-btn" onClick={()=>{console.log("Button Clicked")} }>
+                    Top Rated Restaurents
+                </button>
+            </div>
+
             <div className="res-container">
-                
-             <RestroCard resName="Kaadale Reataurent" cuisine="Berger" imgSrc="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_720,h_420,c_fill/fgcavdtgkvcspffa7nm1" />
-             <RestroCard resName="Balaji Santosh Dhaba" cuisine="Gongura Biriyani" imgSrc="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSddSOwN65QG9V70fcGUhusvH5aamwLlSNlbf_bQ1lOcg&s=10"/>
-             <RestroCard resName="Taj Mahal Hotel" cuisine="Biriyani" imgSrc="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRsb-jXW0334SORt5Mo-znS2oS2Rp8dLQJfSUYRL3-QOA&s"/>
-             <RestroCard resName="Govindas Restraunt" cuisine="Veg Biriyani" imgSrc="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_720,h_420,c_fill/f3164f28ab1b3e372ece4927d50d1b72" />
-             <RestroCard resName="Gokul Tiffin center" cuisine="Tawa Masala Pulao" imgSrc="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSP7rLRWhgoluUJfcL8oKjO2IIJ6k7-JOql579AhWqopezXJ0Ld6WqROdo8&s=10"/>
-             <RestroCard resName="Ashtalakshmi Tiffin center" cuisine="Poori" imgSrc="https://t4.ftcdn.net/jpg/01/43/49/27/360_F_143492736_QgCfB0XKHtZpfGlIb1hr3M6mGCepcDVs.jpg" />
-                           {/* <RestroCard resName="" cuisine="" imgSrc="" /> */}
-             <RestroCard resName="Hotel Godavari" cuisine="" imgSrc="https://b.zmtcdn.com/data/pictures/3/17977903/e1c47b60653bd71c1a2001494deb85bd.jpg" />
-             <RestroCard resName="Raghavendra Tiffin center" cuisine="" imgSrc="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6Zz5udokCdrWqgWs5joeTW8rIXRxm4wC6pSbH4yop-zLGcGrvVI0q47Eo&s=10" />
-             <RestroCard resName="Udipi Pure veg tiffin center" cuisine="" imgSrc="https://images.jdmagicbox.com/v2/comp/coorg/h3/9999p8272.8272.230304095647.u3h3/catalogue/paakashala-kohinoor-road-coorg-restaurants-e6o5c5d065.jpg" />
-            {/* <RestroCard resData={resObj} /> */}
+                 {resList.map((restaurant) => (
+                    <RestroCard
+                     key={restaurant.resName}
+                     {...restaurant}
+                     />
+                    ))}
 
             </div>
         </div>

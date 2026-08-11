@@ -8,14 +8,13 @@ const heading = React.createElement('h1',{id:"heading"},"Online Food Ordering Ap
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(heading);
 
-// const resObj = {}
-const resList = [];
-
 const AppComponent = ()=>(
     <div className="app">
+
         <Header />
         <Body />        
         <Footer />
+        
     </div>
 );
 
