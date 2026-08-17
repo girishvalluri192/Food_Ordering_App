@@ -1,6 +1,6 @@
 import React from "react";
 
-const resList = [
+export const resList = [
   {
     resName: "Kaadale Restaurant - Pure Veg",
     cuisine: "Gongura Biriyani",
@@ -141,4 +141,4 @@ const resList = [
   }
 ];
 
-export default resList;
+// export default resList;

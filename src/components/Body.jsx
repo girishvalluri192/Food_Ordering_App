@@ -1,19 +1,21 @@
 import React from "react";
 import RestroCard from "./RestroCard";
 import { useState,useEffect } from "react";
+// import {resList} from "../utils/resList";
 
 const Body = ()=>{
   const [listOfRestro,setListOfRestro] = useState([]);
 
   // useEffect Hook
-//   useEffect(()=>{fetchData()},[]);
+  useEffect(()=>{fetchData()},[]);
 
-//   const fetchData = async ()=>{
-//     const data = await fetch("https://www.swiggy.com/mapi/restaurants/list/v5?offset=0&is-seo-homepage-enabled=true&lat=17.362825302557773&lng=78.55158694088459&carousel=true&third_party_vendor=1");
-//     const json = await data.json();
-//     console.log(json);
-//     setListOfRestro(json.data.cards[2].card.card);
-//  } 
+  const fetchData = async ()=>{
+    const data = await fetch("https://www.swiggy.com/mapi/restaurants/list/v5?offset=0&is-seo-homepage-enabled=true&lat=17.362825302557773&lng=78.55158694088459&carousel=true&third_party_vendor=1");
+    const json = await data.json();
+    console.log(json);
+    const restro_1 = json.data.cards[2].card.card
+    setListOfRestro(restro_1);
+ } 
 
     return (
         <div className="body">
@@ -32,7 +34,7 @@ const Body = ()=>{
             <div className="res-container">
                  {listOfRestro.map((restaurant) => (
                     <RestroCard
-                     key={restaurant.card.info.id}
+                     key={restaurant.info.id}
                      {...restaurant}
                      />
                     ))}
