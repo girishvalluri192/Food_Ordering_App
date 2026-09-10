@@ -3,6 +3,7 @@ const Contact = ()=>{
         <div>
             <h1> For More Information Please Contact Us </h1>
             <h3> Mobile Number : 8669772541 </h3>
+            <h5> Alternate Contact Address : MyEmailId@gmail.com</h5>
         </div>
     )
 };
