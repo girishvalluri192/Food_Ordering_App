@@ -6,6 +6,7 @@ const About = ()=>{
 
             <h5>This is just an example page for About Us </h5>
             <h5>This is the line added after git update </h5>
+             <h5>This is the line added after git verification update </h5>
         </div>
     )
 };
