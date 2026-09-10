@@ -1,5 +1,6 @@
 import React from "react";
 import { LOGO_URL } from "../utils/constant";
+import { Link } from "react-router-dom";
 
 // Header component form app.js
 const Header = ()=>{
@@ -12,10 +13,9 @@ const Header = ()=>{
             <div className="nav-items">
                 <ul>
                     <li>Home</li>
-                    <li>About Us</li>
-                    <li>Contact Us</li>
-                    <li><a href="#"><i className="fa-solid fa-cart-arrow-down"></i></a>
-                    </li>
+                    <li> <Link to="/about">About Us</Link> </li>
+                    <li><Link to="/contact">Contact Us</Link></li>
+                    <li><Link to="/cart"><i className="fa-solid fa-cart-arrow-down"></i></Link></li>
                 </ul>
 
             </div>
